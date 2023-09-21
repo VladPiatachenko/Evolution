@@ -9,7 +9,12 @@ public class Student {
     private String surname;
     private String email;
 
-    public Student(){}
+    
+    public Student(String name, String surname, String email) {
+        this.name = name;
+        this.surname = surname;
+        this.email = email;
+    }
     
     public String getName() {
         return name;

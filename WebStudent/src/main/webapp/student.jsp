@@ -1,5 +1,5 @@
 <%@page import="java.util.*"%>
-<%@page import="sumdu.edu.ua.Student"%>
+<%@page import="sumdu.edu.ua.webstudent.Student"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
@@ -68,7 +68,7 @@
             student.setEmail(request.getParameter("email"));
             students.add(student);
         }
-        response.sendRedirect("index.jsp");
+        response.sendRedirect("student.jsp");
         %>
 
         </c:if>

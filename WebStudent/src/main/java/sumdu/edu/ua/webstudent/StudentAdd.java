@@ -1,12 +1,13 @@
 package sumdu.edu.ua.webstudent;
 
 import com.mysql.jdbc.Statement;
-import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
+
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
@@ -31,13 +32,11 @@ public class StudentAdd extends HttpServlet {
     
     try{
         
-        HttpSession session = request.getSession();
-        List<Student> students = (List<Student>)session.getAttribute("students");
-        
+        List<Student> students;
         PrintWriter pw=null;
         try{
             pw=response.getWriter();
-            Class.forName("com.mysql.jdbc.Driver");
+            Class.forName("com.db2.jdbc.Driver");
         }
         catch(ClassNotFoundException ex){
             ex.printStackTrace(pw);
@@ -45,14 +44,14 @@ public class StudentAdd extends HttpServlet {
         }
         
         Connection conn=null;
-        conn= (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3311/university","root","root");
+        conn= (Connection) DriverManager.getConnection("jdbc:db2://localhost:3311/university","root","root");
         
         if(request.getParameter("name")!=null && request.getParameter("surname")!=null){
             PreparedStatement ps= (PreparedStatement) conn.prepareStatement("Insert into student (name, surname, age, email, group_, faculty) "+
                     "Values (?, ?, ?, ?, ?, ?)");
             ps.setString(1,request.getParameter("name"));
             ps.setString(2,request.getParameter("surname"));
-            ps.setInt(3,Integer.parseInt(request.getParameter("age")));
+            ps.setInt(3,request.getParameter("age"));
             ps.setString(4,request.getParameter("email"));
             ps.setString(5,request.getParameter("group"));
             ps.setString(6,request.getParameter("faculty"));
@@ -62,13 +61,11 @@ public class StudentAdd extends HttpServlet {
         ResultSet rs=s.executeQuery("SELECT * FROM student;");
         students =new LinkedList<Student>();
         while(rs.next()){
-            Student student = new Student(rs.getString(2),rs.getString(3), Integer.parseInt(rs.getString(4)),rs.getString(5),rs.getString(6),rs.getString(7));
+            Student student = new Student(rs.getString(2),rs.getString(3), rs.getString(4),rs.getString(5),rs.getString(6),rs.getString(7));
             students.add(student);
         }
-        session.setAttribute("students", students);
-        
-        //request.setAttribute("students",students);
-        response.sendRedirect("/student.jsp");
+        request.setAttribute("students",students);
+        response.sendRedirect("/index.jsp");
         
     }
     catch(SQLException ex){

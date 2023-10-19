@@ -3,9 +3,9 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>sumdu.edu.ua</groupId>
     <artifactId>WebStudent</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>3.0-SNAPSHOT</version>
     <packaging>war</packaging>
-    <name>WebStudent-1.0-SNAPSHOT</name>
+    <name>WebStudent-3.0-SNAPSHOT</name>
     
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

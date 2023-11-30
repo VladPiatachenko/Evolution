@@ -16,7 +16,7 @@
     </servlet>
  
     <servlet-mapping>
-        <servlet-name>spring</servlet-name>
+        <servlet-name>SpringServlet</servlet-name>
         <url-pattern>/</url-pattern> 
     </servlet-mapping>
  </web-app>

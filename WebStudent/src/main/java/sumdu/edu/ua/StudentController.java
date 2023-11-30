@@ -34,7 +34,7 @@ public class StudentController {
     Student student;
         @RequestMapping(value = "/")
 	public String home() {
-		return "student";
+		return "student.jsp";
 	}
         
         @RequestMapping("StudentAdd")
@@ -86,7 +86,7 @@ public class StudentController {
             }
             m.addAttribute("students", students);
 
-            return "student";}
+            return "view/student.jsp";}
         
         }
     

@@ -31,10 +31,9 @@ import sumdu.edu.ua.webstudent.Student;
  * @author Oksana
  */
 
-    @Controller
 public class ContentController {
         @RequestMapping(value = "UserContent", method=RequestMethod.GET)
-        public ModelAndView formContent(@RequestParam("id2") String id2,Model m,HttpServletRequest request,HttpServletResponse response) throws IOException, SQLException{ 
+        public ModelAndView formContent(@RequestParam("id") String id2,Model m,HttpServletRequest request,HttpServletResponse response) throws IOException, SQLException{ 
             ModelAndView modelNview = new ModelAndView();
             modelNview.setViewName("score");
             ApplicationContext factory = new ClassPathXmlApplicationContext("/spring.xml");
@@ -49,7 +48,7 @@ public class ContentController {
             }
 
             Connection conn=null;
-            conn= (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3311/university","root","root");
+            conn= (Connection) DriverManager.getConnection("jdbc:db2://localhost:3311/university","root","root");
 
             PreparedStatement ps= (PreparedStatement) conn.prepareStatement("SELECT * FROM student where ID=?;");
                 ps.setString(1, id2);
@@ -62,7 +61,7 @@ public class ContentController {
             modelNview.addObject("user",student);
             }
 
-            ps= (PreparedStatement) conn.prepareStatement("SELECT * FROM scores where stud_id=?;");
+            ps= (PreparedStatement) conn.prepareStatement("SELECT * FROM scores where stud_id!=?;");
                 ps.setString(1, id2);
             rs=ps.executeQuery();
             List<Content> cont = new LinkedList<Content>();

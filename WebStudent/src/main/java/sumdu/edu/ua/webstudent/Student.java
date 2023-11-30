@@ -6,22 +6,30 @@ package sumdu.edu.ua.webstudent;
  */
 public class Student {
     int id;
-    static int nextid=0;
     private String name;
     private String surname;
     private int age;
     private String email;
     private String group;
     private String faculty;
+
+    public void setId(int id) {
+        this.id = id;
+    }
+    public Student(){}
     
-    public Student(String name, String surname,int age, String email, String group, String faculty) {
-        this.id=nextid++;
+    public Student(int id, String name, String surname,int age, String email, String group, String faculty) {
+        this.id=id;
         this.name = name;
         this.surname = surname;
         this.age=age;
         this.email = email;
         this.group = group;
         this.faculty = faculty;
+    }
+
+    public int getId() {
+        return id;
     }
     
     public String getName() {

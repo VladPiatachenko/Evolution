@@ -34,10 +34,10 @@ public class StudentController {
     Student student;
         @RequestMapping(value = "/")
 	public String home() {
-		return "student.jsp";
+		return "student";
 	}
         
-        @RequestMapping("StudentAdd")
+        @RequestMapping("/StudentAdd")
         public String addStudent(HttpServletRequest request,HttpServletResponse response,Model m) throws IOException, SQLException{
             ApplicationContext factory = new ClassPathXmlApplicationContext("/spring.xml");
             List<Student> students;
@@ -86,7 +86,8 @@ public class StudentController {
             }
             m.addAttribute("students", students);
 
-            return "view/student.jsp";}
+            return "student";
+        }
         
         }
     

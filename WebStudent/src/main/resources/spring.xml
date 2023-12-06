@@ -4,6 +4,6 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
 
-<bean id="Student" class="sumdu.edu.ua.webstudent.Student" scope="prototype"/>
-<bean id="Content" class="sumdu.edu.ua.studies.Content" scope="prototype"/>
+<bean id="Student" class="sumdu.edu.ua.model.Student" scope="prototype"/>
+<bean id="Content" class="sumdu.edu.ua.model.Content" scope="prototype"/>
 </beans>

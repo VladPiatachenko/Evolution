@@ -2,18 +2,30 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package sumdu.edu.ua.studies;
+package sumdu.edu.ua.model;
+
+import java.io.Serializable;
+import javax.persistence.*;
 
 /**
  *
  * @author Oksana
  */
-public class Content {
-    int id;
-    int stud_id;
-    String title;
-    String score_l;
-    int score_num;
+@Entity
+@Table(name="scores")
+public class Content implements Serializable {
+    @Id 
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name="id")
+    private int id;
+    @Column(name="stud_id")
+    private int stud_id;
+    @Column(name="Title")
+    private String title;
+    @Column(name="mark_let")
+    private String score_l;
+    @Column(name="mark_num")
+    private int score_num;
     
     public Content(){}
     public Content(int id, int stud_id, String title, String score_l, int score_num) {

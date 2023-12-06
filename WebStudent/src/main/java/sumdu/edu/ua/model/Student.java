@@ -1,18 +1,32 @@
-package sumdu.edu.ua.webstudent;
+package sumdu.edu.ua.model;
+
+import java.io.Serializable;
+import javax.persistence.*;
 
 /**
  *
  * @author Erlkonig
  */
-public class Student {
-    int id;
-    private String name;
-    private String surname;
-    private int age;
-    private String email;
-    private String group;
-    private String faculty;
 
+@Entity
+@Table(name="student")
+public class Student implements Serializable{
+    @Id 
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "ID")
+    private int id;
+    @Column(name = "Name")
+    private String name;
+    @Column(name = "Surname")
+    private String surname;
+    @Column(name = "age")
+    private int age;
+    @Column(name = "email")
+    private String email;
+    @Column(name = "group_")
+    private String group;
+    @Column(name = "faculty")
+    private String faculty;
     public void setId(int id) {
         this.id = id;
     }

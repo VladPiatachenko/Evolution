@@ -14,20 +14,14 @@
                 http://www.springframework.org/schema/context
                 http://www.springframework.org/schema/context/spring-context-4.2.xsd">
 
-	<!-- DispatcherServlet Context: defines this servlet's request-processing 
-		infrastructure -->
-
-	<!-- Enables the Spring MVC @Controller programming model -->
 	<ctx:annotation-config></ctx:annotation-config>
 	<ctx:component-scan base-package="sumdu.edu.ua.controller" />
 
-	<!-- Resolves views selected for rendering by @Controllers to .jsp resources 
-		in the /WEB-INF/views directory -->
 	<beans:bean
 		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<beans:property name="prefix" value="/view/" />
 		<beans:property name="suffix" value=".jsp" />
 	</beans:bean>
         
-     <import resource="db-config.xml"/>
+        <import resource="db-config.xml"/>
 </beans:beans>

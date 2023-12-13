@@ -29,10 +29,8 @@ public class StudentController {
      
     @Autowired
     private StudentDAO dao;
-	    
-	    
-    
-    @ModelAttribute
+	
+        @ModelAttribute
         public void modelData(Model m){
             if(students==null){ students = new LinkedList<Student>();}
             factory = new ClassPathXmlApplicationContext("/spring.xml");
@@ -41,7 +39,7 @@ public class StudentController {
         
         @RequestMapping(value = "/")
 	public String home(Model m) {
-            students=dao.getStudents();
+                students=dao.getStudents();
                 m.addAttribute("students", students);
 		return "student";
 	}
@@ -58,11 +56,12 @@ public class StudentController {
             student.setEmail(request.getParameter("email"));
             student.setGroup(request.getParameter("group"));
             student.setFaculty(request.getParameter("faculty"));
+        
         dao.addStudent(student);}
         students=dao.getStudents();
     
         m.addAttribute("students", students);
-          return "student";
+        return "student";
     }
         
 }

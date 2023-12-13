@@ -13,7 +13,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 import sumdu.edu.ua.model.Content;
-import sumdu.edu.ua.model.Student;
 
 /**
  *
@@ -22,7 +21,8 @@ import sumdu.edu.ua.model.Student;
 @Repository("ContentDAO")
 @EnableTransactionManagement
 public class ContentDAO {
-    @Autowired
+        
+        @Autowired
 	private SessionFactory sessionFactory;
 	
         @Transactional

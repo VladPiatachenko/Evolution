@@ -1,10 +1,4 @@
-<%-- 
-    Document   : score
-    Created on : 21 лист. 2023 р., 21:04:43
-    Author     : Oksana
---%>
-
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="jakarta.tags.core" prefix="c" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>

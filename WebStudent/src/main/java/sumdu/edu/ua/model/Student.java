@@ -1,7 +1,7 @@
 package sumdu.edu.ua.model;
 
-import java.io.Serializable;
-import javax.persistence.*;
+
+import jakarta.persistence.*;
 
 /**
  *
@@ -10,9 +10,9 @@ import javax.persistence.*;
 
 @Entity
 @Table(name="student")
-public class Student implements Serializable{
+public class Student{
     @Id 
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ID")
     private int id;
     @Column(name = "Name")
@@ -30,6 +30,7 @@ public class Student implements Serializable{
     public void setId(int id) {
         this.id = id;
     }
+    
     public Student(){}
     
     public Student(int id, String name, String surname,int age, String email, String group, String faculty) {

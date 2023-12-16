@@ -4,8 +4,8 @@
  */
 package sumdu.edu.ua.model;
 
-import java.io.Serializable;
-import javax.persistence.*;
+
+import jakarta.persistence.*;
 
 /**
  *
@@ -13,7 +13,7 @@ import javax.persistence.*;
  */
 @Entity
 @Table(name="scores")
-public class Content implements Serializable {
+public class Content {
     @Id 
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name="id")

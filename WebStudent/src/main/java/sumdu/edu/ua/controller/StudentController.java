@@ -41,12 +41,11 @@ public class StudentController {
             if(students==null){ students = new LinkedList<Student>();}
             factory = new ClassPathXmlApplicationContext("/spring.xml");
         }
-    
         
         @GetMapping("/")
 	public String home(Model m) {
-                m.addAttribute("students", srepo.findAll());
-		return "student";
+        m.addAttribute("students", srepo.findAll());
+                return "students";
 	}
         
         @RequestMapping(value = "/StudentAdd")

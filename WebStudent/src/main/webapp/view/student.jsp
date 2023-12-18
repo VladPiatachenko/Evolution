@@ -42,6 +42,7 @@
         </style>
     </head>
         <h1><%= (new java.util.Date()).toLocaleString()%></h1>
+        <p><a href="http://localhost:8080/logout">Log out</a></p>
         <form method="post" action="StudentAdd">
             <table>
                 <tbody>

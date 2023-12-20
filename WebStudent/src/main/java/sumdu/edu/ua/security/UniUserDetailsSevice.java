@@ -23,7 +23,6 @@ public class UniUserDetailsSevice implements UserDetailsService {
 		User user = repo.findByUsername(username);
 		if(user==null)
 			throw new UsernameNotFoundException("User 404");
-		
 		return new UserPrincipal(user);
 	}
 

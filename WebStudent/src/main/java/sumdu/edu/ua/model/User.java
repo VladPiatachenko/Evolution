@@ -11,18 +11,18 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
+/**
+ *
+ * @author Oksana
+ */
 @Entity
 @Table(name="users")
 public class User {
     @Id 
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="ID")
     private int id;
-    @Column(name="login")
     private String username;
-    @Column(name="password")
-    private String pass;
-    @Column(name="role")
+    private String password;
     private String role="USER";
 
     public User() {
@@ -41,15 +41,15 @@ public class User {
     }
 
     public void setUsername(String username) {
-        this.username= username;
+        this.username = username;
     }
 
-    public String getPass() {
-        return pass;
+    public String getPassword() {
+        return password;
     }
 
-    public void setPass(String pass) {
-        this.pass = pass;
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public String getRole() {
@@ -59,5 +59,6 @@ public class User {
     public void setRole(String role) {
         this.role = role;
     }
+    
     
 }

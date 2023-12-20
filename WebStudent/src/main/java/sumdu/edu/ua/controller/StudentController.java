@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.ModelAndView;
 import sumdu.edu.ua.repo.StudentRepo;
 import sumdu.edu.ua.model.Student;
 
@@ -27,7 +28,7 @@ import sumdu.edu.ua.model.Student;
  *
  * @author Oksana
  */
-@Controller
+@RestController
 public class StudentController {
     List<Student> students;
     ApplicationContext factory;
@@ -43,13 +44,14 @@ public class StudentController {
         }
         
         @GetMapping("/")
-	public String home(Model m) {
-        m.addAttribute("students", srepo.findAll());
-                return "students";
+	public ModelAndView home(Model m) {
+            ModelAndView mav = new ModelAndView("student");
+            m.addAttribute("students", srepo.findAll());
+                return mav;
 	}
         
         @RequestMapping(value = "/StudentAdd")
-        public String addStudent(HttpServletRequest request,Model m){
+        public ModelAndView addStudent(HttpServletRequest request,Model m){
             
             System.out.println("accesed by "+ request.getParameter("name")+" token:"+request.getParameter("_csrf"));
         if (request.getParameter("name") != "" && request.getParameter("surname") != "") {
@@ -67,7 +69,7 @@ public class StudentController {
         students=srepo.findAll();
     
         m.addAttribute("students", students);
-        return "student";
+        return new ModelAndView("student");
     }
         
 }

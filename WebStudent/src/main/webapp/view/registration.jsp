@@ -6,12 +6,19 @@
 <body>
 <hr>
 <h4>Regiatration</h4>
+<c:if test="${not empty message}">
+    <div class="message">${message}</div>
+</c:if>
+        
 <form action="/signup" method="post">
-    Email: <input type="email" name="email"><br><br>
-    Password: <input type="password" name="password"><br><br>
-    <input type="hidden" name="_csrf" value="${_csrf.token}">
-    <input type="submit" value="Sign up"/>
+    <label for="email">Email:</label>
+    <input type="email" id="email" name="username" required><br>
+
+    <label for="password">Password:</label>
+    <input type="password" id="password" name="password" required><br>
+
+    <input type="submit" value="Register">
 </form>
-    <h5>IF REGISTERED - <a href="http://localhost/login">SIGN IN</a></h5>    
+    <h5><a href="http://localhost:8080/">RETURN</a></h5>    
 </body>
 </html>

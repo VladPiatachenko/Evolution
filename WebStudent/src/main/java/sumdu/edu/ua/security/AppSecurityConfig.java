@@ -4,20 +4,18 @@
  */
 package sumdu.edu.ua.security;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
-import static org.springframework.security.config.Customizer.withDefaults;
+import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.annotation.web.configurers.CsrfConfigurer;
-import org.springframework.security.config.annotation.web.configurers.LogoutConfigurer;
-import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
+import org.springframework.security.web.SecurityFilterChain;
+
+
+
 
 @Configuration
 public class AppSecurityConfig{
@@ -27,15 +25,14 @@ public class AppSecurityConfig{
     
     @Bean
   public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-        http.csrf(CsrfConfigurer::disable)
-        .authorizeHttpRequests((authorize) -> authorize
-                .requestMatchers("/", "/signup").permitAll()
-                .requestMatchers(HttpMethod.POST, "/*").permitAll()
-                .anyRequest().authenticated())
-            .formLogin(withDefaults())
-        .securityContext(context -> context
-            .requireExplicitSave(false));
-    return http.build();
+       http.csrf((csrf) -> csrf.disable())
+                .authorizeHttpRequests((requests)->requests
+                        .requestMatchers("/","/registration","/signup","/view/**","/StudentAdd","/UserContent").authenticated()
+                        .requestMatchers("/login").permitAll())
+                .formLogin(Customizer.withDefaults())
+                .httpBasic(Customizer.withDefaults());
+        return http.build();
+
   }
   
   

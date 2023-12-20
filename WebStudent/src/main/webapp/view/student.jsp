@@ -1,4 +1,5 @@
 <%@ taglib uri="jakarta.tags.core" prefix="c" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -33,16 +34,20 @@
                 background-repeat: no-repeat;
                 background-attachment: fixed;
                 background-size: 100% 100%;
-            }
-            #content{
-                background-color: lightblue;
                 width: 800px;
                 margin: 20px auto;
             }
+            table{
+                background-color: lightblue;
+            }
         </style>
     </head>
+    <body>
         <h1><%= (new java.util.Date()).toLocaleString()%></h1>
         <p><a href="http://localhost:8080/logout">Log out</a></p>
+
+        <sec:authorize access="hasAuthority('ADMIN')">
+            <h3><a href="http://localhost:8080/registration">To sign-up new user </a></h3>
         <form method="post" action="StudentAdd">
             <table>
                 <tbody>
@@ -75,8 +80,12 @@
             <input type="hidden" name="_csrf" value="${_csrf.token}"/>
             <input type="submit" name="send" value="Відправити">
         </form>
+    </sec:authorize>
     
-    <div id="content">
+        <sec:authorize access="isAuthenticated()">
+            
+<sec:authentication property="principal.username" var="username" />
+<p>Welcome, <c:out value="${username}" />!</p>
         <c:if test="${students.size() > 0}">
             <table class="list">
                 <tr>
@@ -89,21 +98,32 @@
                     <th>Faculty</th>
                     <th>Scores</th>
                 </tr>
-                <c:forEach var="student" items="${students}">
-                    <tr>
-                        <td><c:out value="${student.getId()}"/></td>
-                        <td><c:out value="${student.getName()}"/></td>
-                        <td><c:out value="${student.getSurname()}"/></td>
-                        <td><c:out value="${student.getAge()}" /></td>
-                        <td><c:out value="${student.getEmail()}"/></td>
-                        <td><c:out value="${student.getGroup()}"/></td>
-                        <td><c:out value="${student.getFaculty()}"/></td>
-                            <td>
-                                <a href="/UserContent?id2=${student.getId()}">scores</a>
-                            </td>
-                    </tr>
-                </c:forEach>
+                
+
+    <c:forEach var="student" items="${students}">
+<c:if test="${student.getEmail() eq username || username eq 'admin'}">
+        
+            <tr>
+                <td><c:out value="${student.getId()}"/></td>
+                <td><c:out value="${student.getName()}"/></td>
+                <td><c:out value="${student.getSurname()}"/></td>
+                <td><c:out value="${student.getAge()}" /></td>
+                <td><c:out value="${student.getEmail()}"/></td>
+                <td><c:out value="${student.getGroup()}"/></td>
+                <td><c:out value="${student.getFaculty()}"/></td>
+                <td>
+                    <a href="/UserContent?id2=${student.getId()}">scores</a>
+                </td>
+            </tr>
+       
+  </c:if>
+</c:forEach>
+
+
+
             </table>
         </c:if>
-    </div>
+            </sec:authorize>
+       
+    </body>
 </html>

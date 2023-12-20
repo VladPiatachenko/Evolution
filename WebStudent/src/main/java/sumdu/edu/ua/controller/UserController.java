@@ -5,15 +5,18 @@
 package sumdu.edu.ua.controller;
 
 
-import jakarta.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
+
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+
+import org.springframework.web.bind.annotation.RequestMapping;
+
+
 import sumdu.edu.ua.model.User;
 import sumdu.edu.ua.security.UserRepository;
 
@@ -23,23 +26,32 @@ import sumdu.edu.ua.security.UserRepository;
  */
 @Controller
 public class UserController {
-    ApplicationContext factory = new ClassPathXmlApplicationContext("/spring.xml");;
-    
+         
     @Autowired
-    UserRepository repo;
-           
-       
-                    
-        @PostMapping("/signup")
-	public String register(HttpServletRequest request) {
-            User user = (User)factory.getBean("User");
-            if(request.getParameter("email")!=""&&request.getParameter("password")!=""){
-            user.setUsername(request.getParameter("email"));
-            user.setPass(new BCryptPasswordEncoder().encode(request.getParameter("password")));
-            repo.save(user);
-            }
-            return "login";
-	}
+    private UserRepository userRepository;
+    
+    @RequestMapping("/registration")
+    @PreAuthorize("hasAuthority('ADMIN')")
+    public String adminPage() {
+        return "registration";
+    }
+    
+    @RequestMapping("/signup")
+    @PreAuthorize("hasAuthority('ADMIN')")
+    public String registerUser(@ModelAttribute User user, Model m) {
+        String message = "";
+        user.setPassword(new BCryptPasswordEncoder().encode(user.getPassword()));
+        try{
+        userRepository.save(user);
+        message=user.getUsername()+" is succesfully saved!";
+        }
+         catch (Exception e) {
+        message+=e.getMessage();
+        }
+        m.addAttribute("message", message);
+          return "registration";
+    }
+
      
         
 }

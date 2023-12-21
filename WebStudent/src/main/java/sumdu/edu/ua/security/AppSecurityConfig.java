@@ -25,9 +25,11 @@ public class AppSecurityConfig{
     
     @Bean
   public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+      //TODO: fix accesing restricted pages via direct link in adress
        http.csrf((csrf) -> csrf.disable())
-                .authorizeHttpRequests((requests)->requests
-                        .requestMatchers("/","/registration","/signup","/view/**","/StudentAdd","/UserContent").authenticated()
+            .authorizeHttpRequests((requests)->requests
+                        .requestMatchers("/","/registration","/signup",
+                                "/view/**","/StudentAdd","/UserContent").authenticated()
                         .requestMatchers("/login").permitAll())
                 .formLogin(Customizer.withDefaults())
                 .httpBasic(Customizer.withDefaults());
